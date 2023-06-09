@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block head %}
+{%endblock%}
+
+{%block body%}
+
+Profile
+ Username: {{ user }} 
+ First name: {{ user.first_name }}
+  Last name: {{ user.last_name }} 
+  Email: {{ user.email }} 
+  bio: {{ user.userprofile.bio }}
+   Phone: {{ user.userprofile.phoneNumber }} City: {{ user.userprofile.city }}
+    Edit your ProfileChange your password
+    
+     {%endblock%}

@@ -1,0 +1,25 @@
+{% extends  'testapp/base.html' %}
+
+{% load static %}
+
+
+{% block body_block %}
+
+{% if messages %} 
+ {% for message in messages %} 
+ <div class="alert alert-success">{{ message }}</div> 
+ {% endfor %} 
+{% endif %} 
+<form method="post" > 
+{% csrf_token %} 
+{{ form.as_p }} 
+<input type="submit" value="Edit" class="btn btn-success"> 
+</form> 
+
+<a class="nav-link active text-white" href="{% url 'pass_form' 
+%}">Change Password</a>
+
+
+
+
+{% endblock %} 

@@ -1,0 +1,114 @@
+{% extends  'testapp/base.html' %}
+
+{% load static %}
+
+
+{% block body_block %}
+
+{% if messages %} 
+ {% for message in messages %} 
+ <div class="alert alert-success">{{ message }}</div> 
+ {% endfor %} 
+{% endif %} 
+
+
+<div style="display:flex;">
+
+
+
+<div  style="width: 500px; border: solid 2px black; background-color:black; border-radius:8px;  margin-left:450px; margin-top:20px" >
+
+<form method="post"  enctype="multipart/form-data"> 
+{% csrf_token %} 
+{% comment %} {{ edit_key.as_p }}  {% endcomment %}
+
+<div class="input-group">
+			<label style="  font-size:15px; color:blue;" for="first_name">Username:</label>
+                  {{ edit_key.username }}
+
+
+			<label style="  font-size:15px; color:blue;" for="first_name">First Name:</label>
+                  {{ edit_key.first_name}}
+
+                  <div class="input-group">
+			<label style=" font-size:15px; color:blue;" for="bio">Last Name:</label>
+                  {{  edit_key.last_name  }}
+
+            {% comment %} <label style="  font-size:20px; color:green;" for="first_name">Password:</label>
+                  {{ edit_key.password }} {% endcomment %}
+
+
+<button type="submit" value="Edit" class="btn btn-success" style="height:40px; width:500px;margin-top:20px;" > Edit Settings</button>
+</form>  
+
+<br><br><br><br><br>
+<a class="nav-link text-white" href="{% url 'account' %}"> Click to Change profile picture </a>
+
+
+
+
+
+ {% comment %} <a class="nav-link text-white" href="{% url 'edit_profile_page' user.pk %}">Change Profile picture</a>  {% endcomment %}
+
+
+
+
+<div style="margin-top:-600px ; margin-left:-200px">
+
+<h1> Settings</h1>
+ <a class="navbar-brand" href="{% url 'home'%}" > <img src="{% static 'img/set3.png' %}"  style="width:50px; margin-left:150px; margin-top:-75px; height:50px; font-size:75px;"  alt="...">
+
+</a>
+<br>
+
+
+ <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    view profile
+  </button>
+</p>
+
+
+
+
+
+<div class="collapse" id="collapseExample">
+
+
+<div class="card" style="width: 18rem;">
+
+ {%  if user.profile.profile_pic   %} 
+
+
+  <img src="{{ user.profile.profile_pic.url }}" class="card-img-top" alt="..."  >
+
+  {% else%}    
+
+             <img width=100px height=100px float=right src ="{% static 'img/alaye.jpg'   %}">
+
+{% endif %}
+
+  <div class="card card-body">
+    <div class="card-body">
+
+
+
+    
+    <h5 style="color:brown;" class="card-title">{{ user.profile.first_name }} {{ user.last_name }}</h5>
+    <p class="card-text">    <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>First Name:</strong> {{ user.profile.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+        <p><strong>Contact:</strong> {{ user.profile.contact }}</p>
+        <p><strong>Location:</strong> {{ user.profile.location }}</p>
+    <a href="{% url 'account'   %}" class="btn btn-primary">Edit Profile</a>
+  </div>
+</div>
+
+    
+  </div>
+</div>
+
+</div>
+</div>
+
+{% endblock %}

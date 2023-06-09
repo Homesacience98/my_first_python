@@ -1,0 +1,68 @@
+{% extends  'testapp/base.html' %}
+
+{% load static %}
+
+
+{% block body_block %}
+
+
+<div   style=" margin-top:280px;">
+
+ <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    view profile
+  </button>
+</p>
+
+
+
+
+
+<div class="collapse" id="collapseExample">
+
+
+<div class="card" style="width: 18rem;">
+
+ {%  if user.profile.profile_pic   %} 
+
+
+  <img src="{{ user.profile.profile_pic.url }}" class="card-img-top" alt="..."  >
+
+  {% else%}    
+
+             <img width=100px height=100px float=right src ="{% static 'img/alaye.jpg'   %}">
+
+{% endif %}
+
+  <div class="card card-body">
+    <div class="card-body">
+
+
+
+    
+    <h5 style="color:brown;" class="card-title">{{ user.profile.first_name }} {{ user.last_name }}</h5>
+    <p class="card-text">    <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>First Name:</strong> {{ user.profile.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+        <p><strong>Contact:</strong> {{ user.profile.contact }}</p>
+        <p><strong>Location:</strong> {{ user.profile.location }}</p>
+    <a href="{% url 'account'   %}" class="btn btn-primary">Edit Profile</a>
+  </div>
+</div>
+
+    
+  </div>
+</div>
+
+
+
+
+        {% comment %} <img src="{% static 'img/zze.jpeg' %}"alt="" width= 100%> {% endcomment %}
+
+
+ {% comment %} <a class="nav-link text-white" href="{% url 'view_profile' %}">View Profile</a>  {% endcomment %}
+ {% comment %} <a class="nav-link text-white" href="{% url 'edit_profile_page' user.profile.id %}">Profile form</a>  {% endcomment %}
+{% comment %} <a class="nav-link active text-white" href="{% url 'pass_form' %}">Change Password</a> {% endcomment %}
+
+ </div>
+{% endblock %}

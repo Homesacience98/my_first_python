@@ -1,0 +1,20 @@
+{% extends  'testapp/base.html' %}
+
+{% comment %} {% block head %}
+<title>Profile</title>
+{% endblock %} {% endcomment %}
+
+{% block body %}
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+        {% comment %} {{ form.as_table }} {% endcomment %}
+        {{ profile_form.as_table }}
+        </table>
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+</div>
+
+{% endblock %}

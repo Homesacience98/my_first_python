@@ -1,0 +1,33 @@
+{% extends  'testapp/base.html' %}
+
+{% load static %}
+
+{% block body_block %}
+
+
+
+
+<div style="margin-left:400px; margin-top:-500px;">
+<h1> ADD POST</h1>
+
+<form method="post" >
+   {% csrf_token %}
+
+
+   {{ form.as_p }}
+   <button type="submit" class="btn btn-success">POST</button>
+</div>
+
+</form>
+
+<script>
+
+var name ="{{ user.id }}";
+document.getElementById("author").value = name;
+
+
+</script>
+{% comment %} <li>{{post.image}}</li> {% endcomment %}
+
+
+{% endblock %} 

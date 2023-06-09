@@ -1,0 +1,149 @@
+{% extends  'testapp/base.html' %}
+
+{% load static %}
+
+{% block body_block %}
+
+{% if messages %} 
+ {% for message in messages %} 
+ <div class="alert alert-success">{{ message }}</div> 
+ {% endfor %} 
+{% endif %} 
+
+
+<div style="margin-top:-250px; margin-left:240px">
+
+<div class="card" style="width: 20rem;">
+
+ {%  if user.profile.profile_pic   %} 
+
+
+  <img src="{{ user.profile.profile_pic.url }}" class="card-img-top" alt="..."  >
+
+  {% else%}    
+
+             <img width=100px height=100px float=right src ="{% static 'img/alaye.jpg'   %}">
+
+{% endif %}
+
+  <div class="card-body">
+    <h5 style="color:brown;" class="card-title">{{ user.profile.first_name }} {{ user.last_name }}</h5>
+    <p class="card-text">    <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>First Name:</strong> {{ user.profile.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+        <p><strong>Contact:</strong> {{ user.profile.contact }}</p>
+        <p><strong>Location:</strong> {{ user.profile.location }}</p>
+    <a href="{% url 'account'   %}" class="btn btn-primary">Edit Profile</a>
+  </div>
+</div>
+
+{% comment %} <h2> Edit Profile </h2> {%  if user.profile.profile_pic   %} 
+
+        <img width=150px height=130px float=right style="border-radius: 8%; margin-left:10px;border:solid darkpurple 3px; " src ="{{ user.profile.profile_pic.url }}">
+
+  {% else%}    
+
+             <img width=100px height=100px style="border-radius: 50%;" float=right src ="{% static 'img/alaye.jpg'   %}">
+
+ {% endif %}
+
+
+ {% endcomment %}
+		{% comment %} <div class="input-group">
+			<label for="bio">Username</label>
+                  {{ form.bio }}
+
+
+		<div class="input-group">
+			<label for="contact">Password</label>
+                    {{ form.contact }}
+
+
+     <div class="input-group mb-3">
+  <label class="input-group-text" for="inputGroupFile01">Upload</label>
+  {{ form.profile_pic}}
+  <input type="file" class="form-control" id="inputGroupFile01">
+</div> {% endcomment %}
+
+                    {% comment %} <div class="input-group">
+			<label for="password"> Confirm Password</label>
+                    {{ form.password2 }} {% endcomment %}
+
+
+<div  style="width: 450px; border: solid 2px black; background-color:black; border-radius:8px;  margin-left:400px; margin-top:-900px" >
+
+
+ {% comment %} {%  if user.profile.profile_pic   %} 
+
+        <img width=150px height=130px float=right style="border-radius: 8%; margin-left:150px;border:solid darkpurple 3px; " src ="{{ user.profile.profile_pic.url }}">
+
+  {% else%}    
+
+             <img width=100px height=100px style="border-radius: 50%;" float=right src ="{% static 'img/alaye.jpg'   %}">
+
+ {% endif %} {% endcomment %}
+ 
+
+
+
+<form method = "POST" action="" enctype="multipart/form-data">
+ {% csrf_token %} 
+ {% comment %} {{ form.as_p}}  {% endcomment %}
+  <h3> <i style="color: white;" class="bi bi-pencil-fill"> Edit Profile </h3>
+
+<div class="input-group">
+			<label style="  font-size:15px; color:burlywood; margin-left:8px;" for="first_name"><strong> First Name:</strong></label>
+                  {{ form.first_name }}
+
+
+                  <div class="input-group">
+			<label style=" font-size:15px; color:burlywood; margin-left:8px;" for="bio"><strong>  Last Name: </strong></label>
+                  {{ form.last_name }}
+
+
+
+		<div class="input-group">
+			<label style=" font-size:15px; margin-left:8px; color:burlywood;" for="bio"><strong>  Bio:</strong></label>
+                  {{ form.bio }}
+
+
+		<div class="input-group">
+			<label style=" font-size:15px; margin-left:8px; color:burlywood;" for="contact"><strong> Contact:</strong></label>
+                    {{ form.contact }}
+
+		<div class="input-group">
+			<label style=" font-size:15px;  margin-left:8px;color:burlywood;" for="location"><strong> Location:</strong></label>
+                    {{ form.location }}
+
+                    		<div class="input-group">
+			<label style=" font-size:15px;  margin-left:8px;color:burlywood;" for="location"><strong> Created at:</strong></label>
+                    {{ form.created_at}}
+                    	<div class="input-group">
+			<label style=" font-size:15px; margin-left:8px; color:burlywood;" for="location"><strong> Updated at:</strong></label>
+                    {{ form.updated_at}}
+
+
+
+     <div class="input-group mb-3">
+     			<label style=" font-size:15px; margin-left:8px; color:burlywood;" for="picture"><strong> Profile picture</strong></label>
+
+  {% comment %} <label class="input-group-text" for="inputGroupFile01">Upload</label> {% endcomment %}
+  {{ form.profile_pic}}
+  {% comment %} <input type="file" class="form-control" id="inputGroupFile01"> {% endcomment %}
+</div>
+
+
+     {% comment %} <div class="input-group mb-3">
+  {% comment %} <label class="input-group-text" for="inputGroupFile01">Upload</label> {% endcomment %}
+  {% comment %} {{ form.profile_pic}} {% endcomment %}
+  {% comment %} <input type="file" class="form-control" id="inputGroupFile01"> {% endcomment %}
+</div> 
+
+
+<button   type = "submit" name="Update Information"class="btn btn-success"> Update Profile</button>
+
+</form>
+</div>
+
+{% endblock %} 

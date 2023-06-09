@@ -1,0 +1,23 @@
+{% extends  'testapp/base.html' %}
+{% load static %}
+{% block body_block %}
+
+<h2> My profile </h2>
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>First Name:</strong> {{ user.profile.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+        <p><strong>Contact:</strong> {{ user.profile.contact }}</p>
+        <p><strong>Location:</strong> {{ user.profile.location }}</p>
+        <p><strong>Joined DANGS:</strong> {{ user.profile.created_at }}</p>
+        <p><strong>Last profile update:</strong> {{ user.profile.created_at }}</p>
+
+        <img width=40px height=40px float=right src ="{{ user.profile.profile_pic.url }}">
+
+<a class="rounded-circle" href="#"><img width=40px height=40px float=right src ="{{user.profile.profile_pic.url}}"></a>Profile</a> 
+<a class="nav-link text-white" href="{% url 'edit_form' %}">Edit</a>
+
+ {% comment %} <a class="nav-link text-white" href="{% url 'edit_profile_page' %}">Change Profile picture</a>  {% endcomment %}
+
+ 
+{% endblock %} 

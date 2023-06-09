@@ -1,0 +1,39 @@
+{% comment %} {% extends  'testapp/base.html' %}
+
+
+{% block body %} {% endcomment %}
+<form method = "POST" action="" enctype="multipart/form-data">
+ {% csrf_token %} 
+ {% comment %} {{ form.as_p}}  {% endcomment %}
+<h2> Edit post</h2>
+
+<div class="input-group">
+			<label style="  font-size:15px; color:burlywood; margin-left:8px;" for="title"><strong> title:</strong></label>
+            <input type="text" class="form-control" name="title" id="title"required>
+                  {% comment %} {{ form.first_name }} {% endcomment %}
+
+
+
+
+     <div class="input-group mb-3">
+     			<label style=" font-size:15px; margin-left:8px; color:burlywood;" for="caption"><strong> caption</strong></label>
+                <input type="text" id="body" name="body" class="form-control" placeholder="caption" required> 
+  {% comment %} <label class="input-group-text" for="inputGroupFile01">Upload</label> {% endcomment %}
+  {% comment %} <input type="file" class="form-control" id="inputGroupFile01"> {% endcomment %}
+
+       <div class="input-group mb-3">
+     			<label style=" font-size:15px; margin-left:8px; color:burlywood;" for="picture"><strong> Profile picture</strong></label>
+                {% comment %} <input type="file"class="form-control" name="image" id="image" accept="img/*" > {% endcomment %}
+                 <input type="file" class="form-control" id="inputGroupFile01"  accept="img/*"> 
+
+</div>
+
+
+</div> 
+
+
+<button   type = "submit" name="Update Information"class="btn btn-success"> Update Profile</button>
+
+</form>
+
+{% comment %} {% endblock %} {% endcomment %}

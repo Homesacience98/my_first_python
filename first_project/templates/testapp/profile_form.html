@@ -1,0 +1,81 @@
+{% extends  'testapp/base.html' %}
+
+{% load static %}
+
+
+{% block body_block %}
+
+
+<div class="card" style="width: 23rem;  margin-left: 300px; margin-top:-310px;">
+
+ {%  if user.profile.profile_pic   %} 
+
+
+  <img src="{{ user.profile.profile_pic.url }}" class="card-img-top" alt="..."  >
+
+  {% else%}    
+
+             <img width=100px height=100px float=right src ="{% static 'img/alaye.jpg'   %}">
+
+{% endif %}
+
+  <div class="card-body">
+    <h5 style="color:brown;" class="card-title">{{ user.profile.first_name }} {{ user.last_name }}</h5>
+    <p class="card-text">    <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>First Name:</strong> {{ user.profile.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+        <p><strong>Contact:</strong> {{ user.profile.contact }}</p>
+        <p><strong>Location:</strong> {{ user.profile.location }}</p>
+    <a href="{% url 'account'   %}" class="btn btn-primary">Edit Profile</a>
+  </div>
+</div>
+
+        <strong>Joined DANGS:</strong> {{ user.profile.created_at }} &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        <strong>Last profile update:</strong> {{ user.profile.created_at }}</p></p>
+
+
+<div style="margin-left:700px; margin-top:-600px;">
+<h2> {{ user.profile.first_name }}'s profile </h2>
+
+ {%  if user.profile.profile_pic   %} 
+
+        <img width=100px height=100px float=right style="border-radius: 50%;" src ="{{ user.profile.profile_pic.url }}">
+
+  {% else%}    
+
+             <img width=100px height=100px style="border-radius: 50%;" float=right src ="{% static 'img/alaye.jpg'   %}">
+
+ {% endif %}
+
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>First Name:</strong> {{ user.profile.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+        <p><strong>Contact:</strong> {{ user.profile.contact }}</p>
+        <p><strong>Location:</strong> {{ user.profile.location }}</p>
+        <p><strong>Joined DANGS:</strong> {{ user.profile.created_at }}</p>
+        <p><strong>Last profile update:</strong> {{ user.profile.created_at }}</p>
+
+        <img width=40px height=40px float=right src ="{{ user.profile.profile_pic.url }}">
+
+<a class="rounded-circle" href="#"><img width=40px height=40px float=right src ="{{user.profile.profile_pic.url}}"></a>Profile</a> 
+</div>
+
+
+
+{% comment %} {% if messages %} 
+ {% for message in messages %} 
+ <div class="alert alert-success">{{ message }}</div> 
+ {% endfor %} 
+{% endif %}  {% endcomment %}
+{% comment %} <form method="post"  >  {% endcomment %}
+{% comment %} {% csrf_token %}  {% endcomment %}
+{% comment %} {{ profile_key.as_p }}  {% endcomment %}
+
+{% comment %} <label for="avatar" class="control-label">Avatar</label>
+<input type="file" name="avatar" id="avatar"> {% endcomment %}
+
+{% comment %} <input type="submit" value="Edit" class="btn btn-success">  {% endcomment %}
+{% comment %} </form>  {% endcomment %}
+{% endblock %}

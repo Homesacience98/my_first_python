@@ -1,0 +1,73 @@
+{% extends  'testapp/base.html' %}
+
+{% load static %}
+
+{% block body_block %}
+
+
+
+
+<div style=" margin-left:400px ;margin-top:-307px;color:white;" >
+
+ {%  if user.profile.profile_pic   %} 
+
+    <a  href="{% url 'profile_form' user.pk %}"><img width=40px height=40px float=right style="border-radius: 50%;margin-top:-13px;margin-left:10px;" src ="{{ post.author.profile_pic.url }}">
+</a>
+  {% else%}    
+    <a  href="{% url 'profile_form' user.pk %}"><img width=40px height=40px style="border-radius: 50%;" float=right src ="{% static 'img/alaye.jpg'   %}">
+</a>
+ {% endif %}
+
+
+
+
+<div style=" margin-left:57px ;margin-top:-37px;color:white;">
+<div  style="text-decoration:none;">
+<strong style="text-decoration:none;" >  {{post.author.user.username}}</strong>
+</div>
+
+<div style=" font-size:xx-small; text-decoration:none;color:white;" >
+
+{{ user.profile.location}}
+</div>
+</div>
+
+
+
+
+<div class="card mb-3"   href="{% url 'article-detail' post.pk %}" style="width:35rem; background-color:black;color:white;">
+ <a  href="{% url 'article-detail' post.pk %}">  <img src="{{ post.image.url }}"class="card-img-top" alt="..."></a>
+  <div class="card-body">
+    <h5 class="card-title">     <strong>  {{post.author}}:</strong> {{post.body}}
+</h5>
+    <p class="card-text"></p>
+    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+  </div>
+</div>
+   {% comment %} <a  href="{% url 'article-detail' post.pk %}">   <img src="{{ post.image.url }}" class="card-img-top" alt="..."  style="height:500px ;width: 33rem; margin-top:10px; border-radius:15px;" >
+</a><br><br> {% endcomment %}
+    <strong>  {{post.author}}:</strong> {{post.body}}
+{% comment %} {% endfor%} {% endcomment %}
+</div>
+
+<div class="section">
+    <div class="container">
+
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+
+      <form>
+      </form>
+
+      </div>
+
+
+    </div>
+</div>
+
+</div>
+
+
+
+{% endblock %}
+
