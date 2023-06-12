@@ -6,7 +6,7 @@
 {% block body_block %}
 
 
-<div class="card" style="width: 23rem;  margin-left: 300px; margin-top:-310px;">
+{% comment %} <div class="card" style="width: 23rem;  margin-left: 300px; margin-top:-310px;">
 
  {%  if user.profile.profile_pic   %} 
 
@@ -18,8 +18,8 @@
              <img width=100px height=100px float=right src ="{% static 'img/alaye.jpg'   %}">
 
 {% endif %}
-
-  <div class="card-body">
+ {% endcomment %}
+  {% comment %} <div class="card-body">
     <h5 style="color:brown;" class="card-title">{{ user.profile.first_name }} {{ user.last_name }}</h5>
     <p class="card-text">    <p><strong>Username:</strong> {{ user.username }}</p>
         <p><strong>Email:</strong> {{ user.email }}</p>
@@ -29,18 +29,17 @@
         <p><strong>Location:</strong> {{ user.profile.location }}</p>
     <a href="{% url 'account'   %}" class="btn btn-primary">Edit Profile</a>
   </div>
-</div>
+</div> {% endcomment %}
 
-        <strong>Joined DANGS:</strong> {{ user.profile.created_at }} &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-        <strong>Last profile update:</strong> {{ user.profile.created_at }}</p></p>
+        {% comment %} <strong>Joined DANGS:</strong> {{ user.profile.created_at }} &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        <strong>Last profile update:</strong> {{ user.profile.created_at }}</p></p> {% endcomment %}
 
 
-<div style="margin-left:700px; margin-top:-600px;">
-<h2> {{ user.profile.first_name }}'s profile </h2>
+<div style="margin-left:300px; margin-top:-300px;">
 
  {%  if user.profile.profile_pic   %} 
 
-        <img width=100px height=100px float=right style="border-radius: 50%;" src ="{{ user.profile.profile_pic.url }}">
+        <img width=200px height=200px float=right style="border-radius: 50%;" src ="{{ user.profile.profile_pic.url }}">
 
   {% else%}    
 
@@ -48,18 +47,21 @@
 
  {% endif %}
 
-        <p><strong>Username:</strong> {{ user.username }}</p>
-        <p><strong>Email:</strong> {{ user.email }}</p>
-        <p><strong>First Name:</strong> {{ user.profile.first_name }}</p>
-        <p><strong>Last Name:</strong> {{ user.last_name }}</p>
-        <p><strong>Contact:</strong> {{ user.profile.contact }}</p>
-        <p><strong>Location:</strong> {{ user.profile.location }}</p>
-        <p><strong>Joined DANGS:</strong> {{ user.profile.created_at }}</p>
-        <p><strong>Last profile update:</strong> {{ user.profile.created_at }}</p>
+<div style="margin-left: 240px; margin-top: -150px ;color:white;">
+  <h2>  {{ user.username }} </h2> <a href="{% url 'account' %}"  style="margin-left: 100px; margin-top: -80px ;" class="btn btn-primary">Edit Profile</a>
+<br>
+        {% comment %} <p><strong>Email:</strong> {{ user.email }}</p> {% endcomment %}
+        {% comment %} <p><strong>First Name:</strong> {{ user.profile.first_name }}</p> {% endcomment %}
+        {% comment %} <p><strong>Last Name:</strong> {{ user.last_name }}</p> {% endcomment %}
+              <i class="bi bi-geo-alt-fill"> {{ user.profile.location }}  </i><br>
+                   <i class="bi bi-telephone-outbound-fill"> &nbsp;{{ user.profile.contact }}</i>
 
-        <img width=40px height=40px float=right src ="{{ user.profile.profile_pic.url }}">
 
-<a class="rounded-circle" href="#"><img width=40px height=40px float=right src ="{{user.profile.profile_pic.url}}"></a>Profile</a> 
+
+       {% comment %} <strong>Joined DANGS:</strong> {{ user.profile.created_at }}
+        <strong>Last profile update:</strong> {{ user.profile.created_at }} {% endcomment %}
+
+
 </div>
 
 

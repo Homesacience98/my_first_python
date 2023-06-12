@@ -7,18 +7,18 @@ from django.contrib.auth.models import User
 from django.forms import widgets
 from unicodedata import category
 from .models import Post ,Comment
+# from django.forms import ClearableFileInput
 
-
-class CommentForm(ModelForm):
-    Comment = forms.CharField(widget=forms.Textarea(attrs={
-            'rows': '4',
-    }))
+# class CommentForm(ModelForm):
+#     Comment = forms.CharField(widget=forms.Textarea(attrs={
+#             'rows': '4',
+#     }))
 
 class CreateBlogForm(ModelForm):
 
     class Meta:
              model = Post
-             fields = ['title','image','author', 'body']
+             fields = ['title','image', 'body']
 
 
 

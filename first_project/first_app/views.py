@@ -15,12 +15,160 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import PasswordChangeForm 
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
-from django.http import HttpResponse
-from .models import Post
-
+from django.http import HttpResponse,HttpResponseBadRequest
+from .models import Post , Message
+from django.contrib.auth.decorators import login_required
+from django.template import loader
+from django.db.models import Q
+from django.core.paginator import Paginator
 # from .forms import Profile, Meep
 # Create your views here.
 
+@login_required
+def upload_post(request):
+    if request.method == 'POST':
+        post = request.FILES['post']
+        # author = user.objects.filter(username=user.username).first()
+        profile = Profile.objects.get(user=request.user)
+        posts = post.objects.create(user=request.user,image=post,profile=profile)
+        if posts:
+            messages.success(request,"POST_Uploaded")
+    return render(request,'testapp/home.html')
+
+@login_required
+def NewPost(request):
+	user = request.user
+	files_objs = []
+
+	if request.method == 'POST':
+		form = NewPostForm(request.POST, request.FILES)
+		if form.is_valid():
+			image = request.FILES.getlist('image')
+			body = form.cleaned_data.get('body')
+			# tags_form = form.cleaned_data.get('tags')
+
+			# tags_list = list(tags_form.split(','))
+
+			# for tag in tags_list:
+			# 	t, created = Tag.objects.get_or_create(title=tag)
+			# 	tags_objs.append(t)
+
+			for file in files:
+				file_instance = PostFileContent(file=file, user=user)
+				file_instance.save()
+				files_objs.append(file_instance)
+
+			p, created = Post.objects.get_or_create(body=body, user=user)
+			# p.tags.set(tags_objs)
+			p.content.set(files_objs)
+			p.save()
+			return redirect('home')
+	else:
+		form = NewPostForm()
+
+	context = {
+		'form':form,
+	}
+
+	return render(request, 'testapp/chat.html', context)
+
+
+@login_required
+def NewConversation(request, username):
+	from_user = request.user
+	body = ''
+	try:
+		to_user = User.objects.get(username=username)
+	except Exception as e:
+		return redirect('usersearch')
+	if from_user != to_user:
+		Message.send_message(from_user, to_user, body)
+	return redirect('inbox')
+
+
+
+@login_required
+def UserSearch(request):
+	query = request.GET.get("q")
+	context = {}
+	
+	if query:
+		users = User.objects.filter(Q(username__icontains=query))
+
+		#Pagination
+		paginator = Paginator(users, 6)
+		page_number = request.GET.get('page')
+		users_paginator = paginator.get_page(page_number)
+
+		context = {
+				'users': users_paginator,
+			}
+	
+	template = loader.get_template('testapp/search_user.html')
+	
+	return HttpResponse(template.render(context, request))
+
+@login_required
+def inbox(request):
+    user = request.user
+    messages = Message.get_messages(user=request.user)
+    active_direct = None
+    directs = None
+
+    if messages:
+        message = messages[0]
+        active_direct = message['user'].username
+        directs = Message.objects.filter(user=user, recipient= message['user'])
+        directs.update(is_read=True)
+
+        for message in messages:
+            if message['user'].username == active_direct:
+                message['unread'] = 0
+
+        context = {
+                'directs': directs,
+                'messages': messages,
+                'active_direct': active_direct,
+
+        }
+
+    template = loader.get_template('testapp/direct.html')
+    return HttpResponse(template.render(context, request))
+
+@login_required
+def Directs(request, username):
+    user= request.user
+    messages= Message.get_messages(user=user)
+    active_direct = username
+    directs = Message.objects.filter(user=user, recipient__username=username)
+    directs.update(is_read=True)
+
+    for message in messages:
+        if message['user'].username == username:
+            message['unread'] = 0
+
+    context= {
+        'directs': directs,
+        'message': messages,
+        'active_direct': active_direct,
+
+    }
+    template = loader.get_template('testapp/direct.html')
+    return HttpResponse(template.render(context, request))
+
+@login_required
+def SendDirect(request):
+    from_user = request.user
+    to_user_username= request.POST.get('to_user')
+    body = request.POST.get('body')
+
+    if request.method == 'POST':
+        to_user= User.objects.get(username=to_user_username)
+        Message.send_message(from_user,to_user,body)
+        return redirect('inbox')
+
+    else:
+        HttpResponseBadRequest()
 
 
 def post_like(request, pk):
@@ -56,17 +204,21 @@ def must_authenticate_view(request):
 def create_blog_view(request):
 
     context ={}
+    profile = Profile.objects.get(user=request.user)
+
 
     user= request.user
-    if not user.is_authenticated:
-        return redirect('login')
+    # if not user.is_authenticated:
+    #     return redirect('login')
 
     form = CreateBlogForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         obj = form.save(commit=False)
+        # author = author.objects.get(user=request.user)
         author = user.objects.filter(username=user.username).first()
+
         obj.author = author
-        obj.save()
+        # obj.save()
         form= CreateBlogForm()
 
     context['form']= form 
@@ -100,14 +252,14 @@ def create_post(request):
 class AddPostView(CreateView):
     model = Post
     template_name = 'testapp/add_post.html'
-    fields= '__all__'
+    fields= ['image', 'title', 'body','author',]
 
 
 class ArticleDetailView(DetailView):
     model = Post
     template_name = 'testapp/article_detail.html'
 
-    form = CommentForm
+    # form = CommentForm
 
 
 

@@ -1,0 +1,220 @@
+{% extends  'testapp/base.html' %}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Chat</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+    {% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"> {% endcomment %}
+</head>
+
+
+{% block body_block %}
+
+
+            
+<section class="section">
+<div class="container">
+
+<div class="columns is-mobile is-centered">
+<div class="column is-one-quarter" style="margin-left:100px ; margin-top:-360px;width: 880px; heigth:800px; border:grey 1px solid">
+
+
+
+<aside class="menu">
+  <h5  style="color:white;">
+ <br>&nbsp&nbsp&nbsp&nbsp
+  Messages &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+   <a href="{% url 'usersearch' %}" class="button is-success">   <i class="bi bi-envelope-plus-fill"></i> </a> 
+
+</h5>
+  {% comment %} </h1><a href="{% url 'usersearch' %}" class="button is-success">New message</a> {% endcomment %}
+
+<ul class="menu-list" style="overflow-y:scroll;height:500px;width:350px;margin-left:2px ; background-color:black; ">
+
+{% for message in messages %}
+ 
+ <a   onmouseover="this.style.background-color='red'" onmouseout=" this.style.background-color='blue'" style="text-decoration:none;" class="{% if active_direct == message.user.username %}is-active{% endif %}" href="{% url 'directs' message.user.username %}">
+  <div class="box" onmouseover="this.style.backgroundColor='#3D3D3D'" onmouseout=" this.style.backgroundColor='black'" style=" background-color:black;width:330px;margin-left:-30px;heigth:90px; border:black 0.1px groove ;">
+<article class="media">
+<div class="media-left" style="heigth:90px;">
+<figure class="image is-64x64">
+
+
+{% if message.user.profile.profile_pic  %}
+ <img src="{{ message.user.profile.profile_pic.url }}" width=70px height=70px style="border-radius:50%; margin-top:50px;">
+
+ {% else %}
+
+ <img src ="{% static 'img/alaye.jpg' %}" width=70px height=70px style="border-radius:50%;">
+
+ {% endif %}
+</figure>
+  <h5 style="margin-left:80px; margin-top:-70px; text-decoration: none; color:white;">{{ message.user.username }} </h5><h6 style="margin-left:90px;font-size:x-small;color:green;">  <i class="bi bi-geo-alt-fill">  </i>{{ message.user.profile.location }} </h6>                  
+
+</div>
+
+ {% comment %} <div class="content">
+        {% if message.unread %}
+        <p style="font-weight: bold; color: red;">
+          <i class="material-icons">mark_chat_unread</i> {{ message.unread }}
+        </p>
+        {% endif %}        
+      </div>
+
+
+</div> {% endcomment %}
+
+ </article>
+ </div>
+ </a>
+{% endfor %}
+
+  </ul>
+
+</aside>
+<br>
+{% comment %} <a href="{% url 'usersearch' %}" class="button is-success">New message</a> {% endcomment %}
+
+{% comment %} <a class="btn btn-success">New Message</a> {% endcomment %}
+</div>
+
+
+
+
+<div class="column"style= "overflow-y:scroll;height:500px;width:500px;margin-left:477px;margin-top:-560px ; color:white;">
+
+
+<hr>
+
+
+{% comment %} <hr> {% endcomment %}
+
+{% for direct in directs  %}
+
+<div style="margin-right:40px">
+ <div class="box">
+<article class="media">
+<div class="media-left"> 
+  <div class="media-content"> 
+ <div class="content">
+ 
+  <h6 style="margin-left:200px; margin-bottom:70px; font-size:x-small;">{{ direct.date|date:'N d G:i'}}</h6> 
+  <img src="{{ direct.sender.profile.profile_pic.url  }}" width=50px height=50px style="border-radius:50%; margin-top:-40px;">
+  <div class="card" style="margin-left:90px; width:380px; margin-top:-70px;border:solid #3D3D3D 0.2px ;background-color:#3D3D3D; color:white;" >
+  <div class="card-body">
+   {{ direct.body}}
+  </div>
+</div>
+ {% comment %} <small>@{{ direct.sender.username}}</small> <strong>{{ direct.date|date:'N d G:i'}}</strong>  {% endcomment %}
+  {% comment %} <div style="margin-left:90px; margin-top:-60px; border:solid white 0.2px ;background-color:grey; height:50px; border-radius:10px;" > &nbsp  &nbsp  &nbsp <br> &nbsp  &nbsp  &nbsp {{ direct.body}}</div> {% endcomment %}
+<br>
+ </div>
+ {% comment %} </div> {% endcomment %}
+ </article>
+
+</div>
+
+
+{% endfor %}
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+      </div>
+    </nav>
+  </div>
+</article>
+</form>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+</section>
+
+
+
+<form  role="form" method="POST" action="{% url 'send_direct' %}">
+{% csrf_token %}
+
+
+<div class="input-group mb-3" style="width:500px; margin-left:570px;" >
+  <input type="hidden" name="to_user" value= "{{ active_direct }}">
+
+        <textarea style="width:400px; background-color:black;border-radius:10px; color:white;" class="textarea" name="body" placeholder="message"></textarea>
+
+  {% comment %} <input width=80px name="to_user" value="{{ active_direct }} " class="form-control" placeholder="message" aria-label="Recipient's username" aria-describedby="button-addon2"> {% endcomment %}
+    {% comment %} <textarea width=700px class="textarea" name="body" placeholder="Add a comment..."></textarea> {% endcomment %}
+        {% comment %} <button type="submit" name="action" class="button is-info"> Send</button> {% endcomment %}
+
+  <button  class="btn btn-outline-secondary" style="width:70px;"name="action"type="submit" id="button-addon2">send</button>
+</div>
+
+</form>
+
+<form  role="form" method="POST" action="{% url 'send_direct' %}">
+{% csrf_token %}
+{% comment %} <article class="media" style="margin-left:300px;">
+  <figure class="media-right">
+    <p class="image is-8x8">
+      <img src="https://bulma.io/images/placeholders/128x128.png" width=70px>
+    </p>
+  </figure> {% endcomment %}
+        </div>
+
+
+
+
+
+
+
+
+
+    {% comment %} <a class="nav-link active text-white" href="{% url 'userprofile' user_id=user.id %}">pROFILE</a> {% endcomment %}
+        {% comment %} <img src="{% static 'img/t2.jpg' %}"alt="" width= 100%> {% endcomment %}
+        {% comment %} {% endif %}
+        {% endfor %} {% endcomment %}
+                {% comment %} {% endif %} {% endcomment %}
+
+
+
+                {% comment %} <li><a href="{% url 'view_profile'  user_id=user.id %}">Profile</a></li> {% endcomment %}
+
+
+                                  {% comment %} <li><a class="dropdown-item" href="{% url 'edit_profile1'  pk=user.id %}">Edit Profile</a></li> {% endcomment %}
+
+{% comment %} <li><a class="dropdown-item" href="{% url 'edit_profie_page' user.profile.id  %}">Edit Profile</a></li> {% endcomment %}
+
+
+{% comment %} <li><a class="dropdown-item" href="{% url 'account'   %}">Edit Profile</a></li> {% endcomment %}
+
+{% comment %} {% endblock %} {% endcomment %}
+</body>
+</html>
+{% endblock %}

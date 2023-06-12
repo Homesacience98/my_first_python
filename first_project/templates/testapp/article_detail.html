@@ -41,12 +41,12 @@
     <h5 class="card-title">     <strong>  {{post.author}}:</strong> {{post.body}}
 </h5>
     <p class="card-text"></p>
-    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+    <p class="card-text"><small class="text-body-secondary">{{post.date}}</small></p>
   </div>
 </div>
    {% comment %} <a  href="{% url 'article-detail' post.pk %}">   <img src="{{ post.image.url }}" class="card-img-top" alt="..."  style="height:500px ;width: 33rem; margin-top:10px; border-radius:15px;" >
 </a><br><br> {% endcomment %}
-    <strong>  {{post.author}}:</strong> {{post.body}}
+    {% comment %} <strong>  {{post.author}}:</strong> {{post.body}} {% endcomment %}
 {% comment %} {% endfor%} {% endcomment %}
 </div>
 

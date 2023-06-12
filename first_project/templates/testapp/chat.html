@@ -9,9 +9,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Chat</title>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 </head>
 
 
@@ -27,6 +30,258 @@
           <button class="send-button">Send</button>
       </div>
     </div>
+
+
+
+
+<section class="section">
+<div class="container">
+
+
+<div class="columns is-mobile is-centered">
+<div class="column is-one-quarter" style="margin-left:100px ; margin-top:-300px;">
+
+
+<aside class="menu">
+  <h1 >
+  Messages
+  </h1>
+<ul class="menu-list" style="overflow-y:scroll;height:500px;width:200px;">
+
+  <div class="box">
+<article class="media">
+<div class="media-left">
+<figure class="image is-64x64">
+ <img src="http://bulma.io/images/placeholders/128x128.png" alt="Image" >
+ </figure>
+ <div class="media-content">
+ <div class="content">
+ <p>
+ <strong>John smith</strong> <small>@johnsmith</small>
+ </p>
+ </div>
+ </div>
+ </article>
+ </div>
+
+
+  <div class="box">
+<article class="media">
+<div class="media-left">
+<figure class="image is-64x64">
+ <img src="http://bulma.io/images/placeholders/128x128.png" alt="Image" >
+ </figure>
+<div class="media-content">
+ <div class="content">
+ <p> 
+ <strong>John smith</strong> <small>@johnsmith</small>
+ </p>
+ </div>
+ </div>
+ </article>
+ </div>
+
+
+
+  <div class="box">
+<article class="media">
+<div class="media-left">
+<figure class="image is-64x64">
+ <img src="http://bulma.io/images/placeholders/128x128.png" alt="Image" >
+ </figure>
+ <div class="media-content">
+ <div class="content">
+ <p> 
+ <strong>John smith</strong> <small>@johnsmith</small>
+ </p> 
+ </div>
+ </div>
+ </article>
+ </div>
+
+
+ 
+  <div class="box">
+<article class="media">
+<div class="media-left">
+<figure class="image is-64x64">
+ <img src="http://bulma.io/images/placeholders/128x128.png" alt="Image" >
+ </figure>
+  <div class="media-content"> 
+ <div class="content">
+ <p>
+ <strong>John smith</strong> <small>@johnsmith</small>
+ </p>
+ </div>
+ </div>
+ </article>
+ </div>
+
+
+
+
+
+   <div class="box">
+<article class="media">
+<div class="media-left">
+<figure class="image is-64x64">
+ <img src="http://bulma.io/images/placeholders/128x128.png" alt="Image" >
+ </figure>
+ <div class="media-content">
+ <div class="content">
+ <p>
+ <strong>John smith</strong> <small>@johnsmith</small>
+ </p>
+ </div>
+ </div>
+ </article>
+ </div>
+
+  </ul>
+
+</aside>
+
+<a class="btn btn-success">New Message</a>
+</div>
+
+
+{% comment %} <div class="column"style= "overflow-y:scroll;heigth:100px; width: 500px;margin-left:300px;margin-top:-50px"> {% endcomment %}
+
+
+<div class="column"style= "overflow-y:scroll;height:500px;width:500px;margin-left:400px;margin-top:-500px">
+
+
+ <div class="box">
+<article class="media">
+<div class="media-left"> 
+  <div class="media-content"> 
+ <div class="content">
+ <p>
+ <strong>John smith</strong> <small>@johnsmith</small>
+ </p>
+{% lorem 1 %}
+ </div>
+ </div>
+ </article>
+ </div>
+
+
+
+ <div class="box">
+<article class="media">
+<div class="media-left"> 
+  <div class="media-content"> 
+ <div class="content">
+ <p>
+ <strong>John smith</strong> <small>@johnsmith</small>
+ </p>
+{% lorem 1 %}
+ </div>
+ </div>
+ </article>
+ </div>
+
+
+ <div class="box">
+<article class="media">
+<div class="media-left"> 
+  <div class="media-content"> 
+ <div class="content">
+ <p>
+ <strong>John smith</strong> <small>@johnsmith</small>
+ </p>
+{% lorem 1 %}
+ </div>
+ </div>
+ </article>
+ </div>
+
+
+
+
+</div>
+
+{% comment %} <div class="column"style= " width: 500px;margin-left:300px;margin-top:-480px">
+ <div class="box">
+<article class="media">
+<div class="media-left">
+  <div class="media-content"> 
+ <div class="content">
+ <p>
+ <strong>John smith</strong> <small>@johnsmith</small>
+ </p>
+{% lorem 1 %}
+ </div>
+ </div>
+ </article>
+ </div>
+</div> {% endcomment %}
+
+{% comment %} <div class="column"style= " width: 500px;margin-left:300px;margin-top:-480px">
+ <div class="box">
+<article class="media">
+<div class="media-left">
+  <div class="media-content"> 
+ <div class="content">
+ <p>
+ <strong>John smith</strong> <small>@johnsmith</small>
+ </p>
+{% lorem 1 %}
+ </div>
+ </div>
+ </article>
+ </div>
+</div>
+
+
+</div> {% endcomment %}
+
+
+
+
+
+</div>
+
+<article class="media" style="margin-left:300px;">
+  <figure class="media-right">
+    <p class="image is-8x8">
+      <img src="https://bulma.io/images/placeholders/128x128.png" width=70px>
+    </p>
+  </figure>
+  <div class="media-content">
+    <div class="field">
+      <p class="control">
+        <textarea width=400px class="textarea" placeholder="Add a comment..."></textarea>
+      </p>
+    </div>
+    <nav class="level">
+      <div class="level-left">
+        <div class="level-item">
+        <a class="btn btn-success">Send</a>
+
+        </div>
+      </div>
+    </nav>
+  </div>
+</article>
+</div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     {% comment %} <a class="nav-link active text-white" href="{% url 'userprofile' user_id=user.id %}">pROFILE</a> {% endcomment %}
         {% comment %} <img src="{% static 'img/t2.jpg' %}"alt="" width= 100%> {% endcomment %}
@@ -44,7 +299,7 @@
 {% comment %} <li><a class="dropdown-item" href="{% url 'edit_profie_page' user.profile.id  %}">Edit Profile</a></li> {% endcomment %}
 
 
-<li><a class="dropdown-item" href="{% url 'account'   %}">Edit Profile</a></li>
+{% comment %} <li><a class="dropdown-item" href="{% url 'account'   %}">Edit Profile</a></li> {% endcomment %}
 
 {% endblock %}
 </body>

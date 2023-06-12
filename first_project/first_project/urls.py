@@ -21,11 +21,20 @@ from django.conf import settings
 from django.conf.urls.static import static
 from first_app import views
 from django.contrib.auth import views as auth_views
-from first_app.views import pass_form, must_authenticate_view
-from first_app.views import HomeView , ArticleDetailView ,create_post1
+from first_app.views import pass_form, must_authenticate_view , UserSearch, NewConversation
+from first_app.views import HomeView , ArticleDetailView ,create_post1 , inbox , Directs ,SendDirect
 
 
 urlpatterns = [
+
+
+    path('uploadpost/',views.upload_post,name="upload_post"),
+
+    path('new/<username>', NewConversation, name='newconversation'),
+    path('new/', UserSearch, name='usersearch'),
+    path('direct/', inbox, name='inbox'),
+    path('directs/<username>', Directs, name='directs'),
+    path('send/', SendDirect, name='send_direct'),
 
     path('home/' , create_post1,name= 'home1'),
     path('tolu1/',AddPostView.as_view(),name= 'add_post'),
